@@ -3,3 +3,7 @@ export * from "./splash-screen";
 export * from "./walkthrough-screen";
 export * from "./verifyotp-screen";
 export * from "./loginsuccess-screen";
+export * from "./home-screen";
+export * from "./notification-screen";
+export * from "./profile-screen";
+export * from "./shopping-screen";

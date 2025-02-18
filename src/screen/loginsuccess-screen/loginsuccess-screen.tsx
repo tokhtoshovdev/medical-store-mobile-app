@@ -2,7 +2,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export const LoginsuccessScreen = ({ navigation }: { navigation: any }) => {
   const onSubmit = () => {
-    navigation.navigate("loginsuccess");
+    navigation.navigate("home");
   };
   return (
     <View style={styles.container}>
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 5,
     elevation: 5,
-    marginTop: 30,
+    marginTop: 100,
   },
   buttonText: {
     color: "#fff",

@@ -6,6 +6,7 @@ import {
   VerifyOtpScreen,
   WalkthroughScreen,
 } from "../screen";
+import { RootTabs } from "../root-tabs";
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,7 @@ export const RootStack = () => {
       <Stack.Screen name="login" component={LoginScreen} />
       <Stack.Screen name="verify" component={VerifyOtpScreen} />
       <Stack.Screen name="loginsuccess" component={LoginsuccessScreen} />
+      <Stack.Screen name="home" component={RootTabs} />
     </Stack.Navigator>
   );
 };

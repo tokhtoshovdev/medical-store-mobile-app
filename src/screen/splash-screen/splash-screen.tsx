@@ -7,7 +7,7 @@ export const SplashScreen = ({ navigation }: SplashScreenProps) => {
   useEffect(() => {
     setTimeout(() => {
       navigation.replace("walkthrough");
-    }, 2000);
+    }, 1500);
   }, [navigation]);
 
   return (
