@@ -3,6 +3,7 @@ import {
   FlatList,
   Image,
   ImageBackground,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -18,6 +19,33 @@ const categories = [
   { id: "4", name: "Eye care", colors: ["#007bff", "#4facfe"] },
 ];
 
+const products = [
+  {
+    id: 1,
+    img: "../../../assets/product-img.png",
+    rs: "Rs.112",
+    star: "4",
+    strip: "Test Strip",
+    title: "Accu-check Active",
+  },
+  {
+    id: 2,
+    img: "../../../assets/product-img.png",
+    rs: "Rs.112",
+    star: "4",
+    strip: "Test Strip",
+    title: "Accu-check Active",
+  },
+  {
+    id: 3,
+    img: "../../../assets/product-img.png",
+    rs: "Rs.112",
+    star: "4",
+    strip: "Test Strip",
+    title: "Accu-check Active",
+  },
+];
+
 const CategoryCard = ({ name, colors }: { name: string; colors: any }) => {
   return (
     <View style={styles.card}>
@@ -27,135 +55,149 @@ const CategoryCard = ({ name, colors }: { name: string; colors: any }) => {
   );
 };
 
-import image from "../../../assets/home-swipper.png";
+const image = require("../../../assets/home-swipper.png");
 import { ProductCard } from "../../components";
 
 export const HomeScreen = () => {
   return (
-    <View style={styles.container}>
-      <StatusBar style="light" />
-      <LinearGradient colors={["#4facfe", "#00f2fe"]} style={styles.header}>
-        <View style={styles.headerContent}>
-          <Image
-            source={require("../../../assets/avatar.jpg")}
-            style={styles.avatar}
-          />
-          <View style={styles.iconContainer}>
-            <Ionicons name="notifications" size={30} color="#fff" />
-            <Ionicons name="cart" size={30} color="#fff" />
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      <View style={styles.container}>
+        <StatusBar style="auto" />
+        <LinearGradient colors={["#4facfe", "#00f2fe"]} style={styles.header}>
+          <View style={styles.headerContent}>
+            <Image
+              source={require("../../../assets/avatar.jpg")}
+              style={styles.avatar}
+            />
+            <View style={styles.iconContainer}>
+              <Ionicons name="notifications" size={30} color="#fff" />
+              <Ionicons name="cart" size={30} color="#fff" />
+            </View>
           </View>
+          <View style={styles.greetingContainer}>
+            <Text style={styles.greeting1}>Hi, Rahul</Text>
+            <Text style={styles.greeting}>
+              Welcome to Nilkanth Medical Store
+            </Text>
+          </View>
+        </LinearGradient>
+        <View style={styles.searchContainer}>
+          <Ionicons
+            name="search"
+            size={24}
+            color="gray"
+            style={styles.searchIcon}
+          />
+          <TextInput
+            placeholder="Search Medicine & Healthcare products"
+            style={styles.searchInput}
+          />
         </View>
-        <View style={styles.greetingContainer}>
-          <Text style={styles.greeting1}>Hi, Rahul</Text>
-          <Text style={styles.greeting}>Welcome to Nilkanth Medical Store</Text>
+        <View style={styles.categoryWrapper}>
+          <Text style={styles.categoryTitle}>Top Categories</Text>
+          <FlatList
+            horizontal
+            data={categories}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <CategoryCard name={item.name} colors={item.colors} />
+            )}
+            contentContainerStyle={styles.list}
+            showsHorizontalScrollIndicator={false}
+          />
         </View>
-      </LinearGradient>
-      <View style={styles.searchContainer}>
-        <Ionicons
-          name="search"
-          size={24}
-          color="gray"
-          style={styles.searchIcon}
-        />
-        <TextInput
-          placeholder="Search Medicine & Healthcare products"
-          style={styles.searchInput}
-        />
-      </View>
-      <View style={styles.categoryWrapper}>
-        <Text style={styles.categoryTitle}>Top Categories</Text>
-        <FlatList
-          horizontal
-          data={categories}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <CategoryCard name={item.name} colors={item.colors} />
-          )}
-          contentContainerStyle={styles.list}
-          showsHorizontalScrollIndicator={false}
-        />
-      </View>
-      <View
-        style={{
-          paddingHorizontal: 20,
-          marginTop: 20,
-        }}
-      >
-        <ImageBackground
-          source={image}
-          resizeMode="cover"
-          style={{ width: "auto", height: 146, borderRadius: 10, padding: 30 }}
+        <View
+          style={{
+            paddingHorizontal: 20,
+            marginTop: 20,
+          }}
+        >
+          <ImageBackground
+            source={image}
+            resizeMode="cover"
+            style={{
+              width: "auto",
+              height: 146,
+              borderRadius: 10,
+              padding: 30,
+            }}
+          >
+            <Text
+              style={{
+                width: 131,
+                fontFamily: "Overpass",
+                fontWeight: "700",
+                fontSize: 20,
+                lineHeight: 21,
+                color: "#1987FB",
+              }}
+            >
+              Save extra on every order
+            </Text>
+            <Text
+              style={{
+                width: 118,
+                fontFamily: "Overpass",
+                fontWeight: "300",
+                fontSize: 12,
+                lineHeight: 16.36,
+                color: "#090F47A6",
+              }}
+            >
+              Etiam mollis metus non faucibus .{" "}
+            </Text>
+          </ImageBackground>
+        </View>
+        <View
+          style={{
+            paddingHorizontal: 20,
+            marginTop: 20,
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
         >
           <Text
             style={{
-              width: 131,
               fontFamily: "Overpass",
-              fontWeight: "700",
+              fontWeight: "600",
               fontSize: 20,
-              lineHeight: 21,
-              color: "#1987FB",
+              lineHeight: 20.26,
+              color: "#090F47",
             }}
           >
-            Save extra on every order
+            Deals of the Day
           </Text>
           <Text
             style={{
-              width: 118,
               fontFamily: "Overpass",
-              fontWeight: "300",
-              fontSize: 12,
-              lineHeight: 16.36,
-              color: "#090F47A6",
+              fontWeight: "400",
+              fontSize: 14,
+              lineHeight: 17.72,
+              color: "#006AFF",
             }}
           >
-            Etiam mollis metus non faucibus .{" "}
+            More
           </Text>
-        </ImageBackground>
-      </View>
-      <View
-        style={{
-          paddingHorizontal: 20,
-          marginTop: 20,
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
-        <Text
+        </View>
+        <View
           style={{
-            fontFamily: "Overpass",
-            fontWeight: "600",
-            fontSize: 20,
-            lineHeight: 20.26,
-            color: "#090F47",
+            paddingHorizontal: 20,
+            marginTop: 20,
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+            gap: 16,
+            marginBottom: 20,
           }}
         >
-          Deals of the Day
-        </Text>
-        <Text
-          style={{
-            fontFamily: "Overpass",
-            fontWeight: "400",
-            fontSize: 14,
-            lineHeight: 17.72,
-            color: "#006AFF",
-          }}
-        >
-          More
-        </Text>
+          {products.map((product) => (
+            <View key={product.id} style={{ width: "47%" }}>
+              <ProductCard {...product} />
+            </View>
+          ))}
+        </View>
       </View>
-      <View
-        style={{
-          paddingHorizontal: 20,
-          marginTop: 20,
-          flexDirection: "row",
-          justifyContent: "space-between",
-          gap: 16,
-        }}
-      >
-        <ProductCard />
-        <ProductCard />
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 

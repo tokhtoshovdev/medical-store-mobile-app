@@ -15,6 +15,12 @@ export const RootTabs = () => {
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: false,
+        tabBarStyle: {
+          position: "absolute",
+          height: 60,
+          backgroundColor: "#fff",
+        },
+        keyboardHidesTabBar: false,
         tabBarIcon: ({ color, size }) => {
           let iconName;
           if (route.name === "home") {
