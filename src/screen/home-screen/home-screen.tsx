@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import {
   FlatList,
   Image,
+  ImageBackground,
   StyleSheet,
   Text,
   TextInput,
@@ -25,6 +26,9 @@ const CategoryCard = ({ name, colors }: { name: string; colors: any }) => {
     </View>
   );
 };
+
+import image from "../../../assets/home-swipper.png";
+import { ProductCard } from "../../components";
 
 export const HomeScreen = () => {
   return (
@@ -70,6 +74,86 @@ export const HomeScreen = () => {
           contentContainerStyle={styles.list}
           showsHorizontalScrollIndicator={false}
         />
+      </View>
+      <View
+        style={{
+          paddingHorizontal: 20,
+          marginTop: 20,
+        }}
+      >
+        <ImageBackground
+          source={image}
+          resizeMode="cover"
+          style={{ width: "auto", height: 146, borderRadius: 10, padding: 30 }}
+        >
+          <Text
+            style={{
+              width: 131,
+              fontFamily: "Overpass",
+              fontWeight: "700",
+              fontSize: 20,
+              lineHeight: 21,
+              color: "#1987FB",
+            }}
+          >
+            Save extra on every order
+          </Text>
+          <Text
+            style={{
+              width: 118,
+              fontFamily: "Overpass",
+              fontWeight: "300",
+              fontSize: 12,
+              lineHeight: 16.36,
+              color: "#090F47A6",
+            }}
+          >
+            Etiam mollis metus non faucibus .{" "}
+          </Text>
+        </ImageBackground>
+      </View>
+      <View
+        style={{
+          paddingHorizontal: 20,
+          marginTop: 20,
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <Text
+          style={{
+            fontFamily: "Overpass",
+            fontWeight: "600",
+            fontSize: 20,
+            lineHeight: 20.26,
+            color: "#090F47",
+          }}
+        >
+          Deals of the Day
+        </Text>
+        <Text
+          style={{
+            fontFamily: "Overpass",
+            fontWeight: "400",
+            fontSize: 14,
+            lineHeight: 17.72,
+            color: "#006AFF",
+          }}
+        >
+          More
+        </Text>
+      </View>
+      <View
+        style={{
+          paddingHorizontal: 20,
+          marginTop: 20,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          gap: 16,
+        }}
+      >
+        <ProductCard />
+        <ProductCard />
       </View>
     </View>
   );
