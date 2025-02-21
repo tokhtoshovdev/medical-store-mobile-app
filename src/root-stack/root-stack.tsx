@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
 export const RootStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName="home"
+      initialRouteName="splash"
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="splash" component={SplashScreen} />

@@ -55,10 +55,19 @@ const CategoryCard = ({ name, colors }: { name: string; colors: any }) => {
   );
 };
 
+type RootStackParamList = {
+  notification: undefined;
+  shopping: undefined;
+};
+
 const image = require("../../../assets/home-swipper.png");
 import { ProductCard } from "../../components";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "react-native-screens/lib/typescript/native-stack/types";
 
 export const HomeScreen = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View style={styles.container}>
@@ -70,8 +79,18 @@ export const HomeScreen = () => {
               style={styles.avatar}
             />
             <View style={styles.iconContainer}>
-              <Ionicons name="notifications" size={30} color="#fff" />
-              <Ionicons name="cart" size={30} color="#fff" />
+              <Ionicons
+                name="notifications"
+                onPress={() => navigation.navigate("notification")}
+                size={30}
+                color="#fff"
+              />
+              <Ionicons
+                name="cart"
+                onPress={() => navigation.navigate("shopping")}
+                size={30}
+                color="#fff"
+              />
             </View>
           </View>
           <View style={styles.greetingContainer}>
