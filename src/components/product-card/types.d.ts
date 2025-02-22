@@ -9,4 +9,5 @@ export interface Props {
   description?: string;
   rating?: number;
   navigation?: any;
+  shopping?: boolean;
 }

@@ -10,6 +10,7 @@ export const PRODUCTS = [
     description:
       "Effective pain reliever and fever reducer, commonly used for headaches, muscle aches, and flu symptoms.",
     rating: 4.7,
+    shopping: true,
   },
   {
     id: 2,
@@ -22,6 +23,7 @@ export const PRODUCTS = [
     description:
       "Nonsteroidal anti-inflammatory drug (NSAID) used to relieve pain, fever, and inflammation.",
     rating: 4.5,
+    shopping: false,
   },
   {
     id: 3,
@@ -34,6 +36,7 @@ export const PRODUCTS = [
     description:
       "Broad-spectrum antibiotic used to treat various bacterial infections, including respiratory and skin infections.",
     rating: 4.8,
+    shopping: false,
   },
   {
     id: 4,
@@ -46,6 +49,7 @@ export const PRODUCTS = [
     description:
       "Relieves cough and throat irritation with a soothing formula.",
     rating: 4.3,
+    shopping: false,
   },
   {
     id: 5,
@@ -58,6 +62,7 @@ export const PRODUCTS = [
     description:
       "Boosts immunity and supports overall health with high-dose Vitamin C.",
     rating: 4.9,
+    shopping: true,
   },
   {
     id: 6,
@@ -70,6 +75,7 @@ export const PRODUCTS = [
     description:
       "Helps reduce pain, fever, and inflammation. Often used for heart health.",
     rating: 4.6,
+    shopping: false,
   },
   {
     id: 7,
@@ -82,6 +88,7 @@ export const PRODUCTS = [
     description:
       "Reduces stomach acid production, commonly used for acid reflux and ulcers.",
     rating: 4.7,
+    shopping: false,
   },
   {
     id: 8,
@@ -94,6 +101,7 @@ export const PRODUCTS = [
     description:
       "Relieves allergy symptoms such as runny nose, sneezing, and itchy eyes.",
     rating: 4.4,
+    shopping: false,
   },
   {
     id: 9,
@@ -106,6 +114,7 @@ export const PRODUCTS = [
     description:
       "Used to control high blood sugar in people with type 2 diabetes.",
     rating: 4.8,
+    shopping: false,
   },
   {
     id: 10,
@@ -117,6 +126,7 @@ export const PRODUCTS = [
     manufacturer: "Wellness Meds",
     description: "Non-drowsy antihistamine that relieves allergy symptoms.",
     rating: 4.5,
+    shopping: false,
   },
   {
     id: 11,
@@ -129,6 +139,7 @@ export const PRODUCTS = [
     description:
       "Used to suppress coughs caused by colds or respiratory infections.",
     rating: 4.3,
+    shopping: false,
   },
   {
     id: 12,
@@ -140,6 +151,7 @@ export const PRODUCTS = [
     manufacturer: "DigestiveCare",
     description: "Reduces stomach acid and prevents heartburn.",
     rating: 4.6,
+    shopping: false,
   },
   {
     id: 13,
@@ -152,5 +164,6 @@ export const PRODUCTS = [
     description:
       "Effective in treating bacterial infections such as pneumonia and bronchitis.",
     rating: 4.9,
+    shopping: false,
   },
 ];

@@ -18,6 +18,13 @@ export const ProductDetail = ({
 }) => {
   const { id } = route.params;
   const product = PRODUCTS.find((p) => p.id === id);
+
+  const addToCart = () => {
+    if (product) {
+      product.shopping = true;
+      navigation.goBack();
+    }
+  };
   return (
     <ScrollView style={{ flex: 1, backgroundColor: "#fff", padding: 16 }}>
       <Ionicons
@@ -97,7 +104,7 @@ export const ProductDetail = ({
         </Text>
 
         <TouchableOpacity
-          onPress={() => navigation.goBack()}
+          onPress={() => addToCart()}
           style={{
             width: 330,
             height: 45,
