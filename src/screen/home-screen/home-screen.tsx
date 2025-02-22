@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -17,33 +18,6 @@ const categories = [
   { id: "2", name: "Wellness", colors: ["#00c6a9", "#00e676"] },
   { id: "3", name: "Homeo", colors: ["#ff8c00", "#ffb74d"] },
   { id: "4", name: "Eye care", colors: ["#007bff", "#4facfe"] },
-];
-
-const products = [
-  {
-    id: 1,
-    img: "../../../assets/product-img.png",
-    rs: "Rs.112",
-    star: "4",
-    strip: "Test Strip",
-    title: "Accu-check Active",
-  },
-  {
-    id: 2,
-    img: "../../../assets/product-img.png",
-    rs: "Rs.112",
-    star: "4",
-    strip: "Test Strip",
-    title: "Accu-check Active",
-  },
-  {
-    id: 3,
-    img: "../../../assets/product-img.png",
-    rs: "Rs.112",
-    star: "4",
-    strip: "Test Strip",
-    title: "Accu-check Active",
-  },
 ];
 
 const CategoryCard = ({ name, colors }: { name: string; colors: any }) => {
@@ -58,16 +32,20 @@ const CategoryCard = ({ name, colors }: { name: string; colors: any }) => {
 type RootStackParamList = {
   notification: undefined;
   shopping: undefined;
+  allProducts: undefined;
+  product: {
+    id: number;
+  };
 };
 
 const image = require("../../../assets/home-swipper.png");
+import { PRODUCTS } from "../../mock";
+import { StackScreenProps } from "@react-navigation/stack";
 import { ProductCard } from "../../components";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "react-native-screens/lib/typescript/native-stack/types";
 
-export const HomeScreen = () => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+export const HomeScreen = ({
+  navigation,
+}: StackScreenProps<RootStackParamList>) => {
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View style={styles.container}>
@@ -194,6 +172,7 @@ export const HomeScreen = () => {
               lineHeight: 17.72,
               color: "#006AFF",
             }}
+            onPress={() => navigation.navigate("allProducts")}
           >
             More
           </Text>
@@ -209,10 +188,12 @@ export const HomeScreen = () => {
             marginBottom: 20,
           }}
         >
-          {products.map((product) => (
-            <View key={product.id} style={{ width: "47%" }}>
-              <ProductCard {...product} />
-            </View>
+          {PRODUCTS.slice(0, 4).map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              navigation={navigation}
+            />
           ))}
         </View>
       </View>
@@ -224,6 +205,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F3F4F5",
+    marginBottom: 50,
   },
   header: {
     width: "100%",

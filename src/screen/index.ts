@@ -7,3 +7,5 @@ export * from "./home-screen";
 export * from "./notification-screen";
 export * from "./profile-screen";
 export * from "./shopping-screen";
+export * from "./all-product-screen";
+export * from "./product-detail-screen";

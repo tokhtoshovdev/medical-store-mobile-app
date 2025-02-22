@@ -1,7 +1,12 @@
 export interface Props {
-  img: string;
-  title: string;
-  star: string;
-  rs: string;
-  strip: string;
+  id?: number;
+  title?: string;
+  img?: string;
+  price?: number;
+  stock?: 150;
+  category?: string;
+  manufacturer?: string;
+  description?: string;
+  rating?: number;
+  navigation?: any;
 }
