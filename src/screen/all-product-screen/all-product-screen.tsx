@@ -1,11 +1,14 @@
 import { StyleSheet, Text, View, FlatList, ScrollView } from "react-native";
-import { PRODUCTS } from "../../mock";
 import { ProductCard } from "../../components";
 import { Ionicons } from "@expo/vector-icons";
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/store";
 
 export const AllProduct = ({ navigation }: { navigation: any }) => {
+  const products = useSelector((state: RootState) => state.cart.products);
+
   return (
-    <ScrollView>
+    <ScrollView style={{ flex: 1 }}>
       <View style={styles.container}>
         <View
           style={{
@@ -23,10 +26,14 @@ export const AllProduct = ({ navigation }: { navigation: any }) => {
           <Text style={styles.title}>All Products</Text>
         </View>
         <FlatList
-          data={PRODUCTS}
+          data={products}
           keyExtractor={(item) => item.id.toString()}
           numColumns={2}
-          columnWrapperStyle={{ justifyContent: "space-between", gap: 16 }}
+          columnWrapperStyle={{
+            justifyContent: "space-between",
+            gap: 16,
+            marginBottom: 20,
+          }}
           contentContainerStyle={{ paddingBottom: 20 }}
           renderItem={({ item }) => (
             <ProductCard product={item} navigation={navigation} />

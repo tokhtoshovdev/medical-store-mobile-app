@@ -38,13 +38,16 @@ type RootStackParamList = {
 };
 
 const image = require("../../../assets/home-swipper.png");
-import { PRODUCTS } from "../../mock";
 import { StackScreenProps } from "@react-navigation/stack";
 import { ProductCard } from "../../components";
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/store";
 
 export const HomeScreen = ({
   navigation,
 }: StackScreenProps<RootStackParamList>) => {
+  const products = useSelector((state: RootState) => state.cart.products);
+
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View style={styles.container}>
@@ -187,7 +190,7 @@ export const HomeScreen = ({
             marginBottom: 20,
           }}
         >
-          {PRODUCTS.slice(0, 4).map((product) => (
+          {products.slice(0, 4).map((product) => (
             <ProductCard
               key={product.id}
               product={product}
@@ -268,7 +271,6 @@ const styles = StyleSheet.create({
     paddingLeft: 30,
   },
   categoryWrapper: {
-    paddingHorizontal: 20,
     marginTop: 20,
   },
   categoryTitle: {
@@ -277,6 +279,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     lineHeight: 20.26,
     marginBottom: 10,
+    marginLeft: 20,
   },
   list: {
     paddingHorizontal: 10,

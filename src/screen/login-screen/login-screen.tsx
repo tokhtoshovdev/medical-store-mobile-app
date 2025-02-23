@@ -18,8 +18,12 @@ export const LoginScreen = ({ navigation }: HomeScreenProps) => {
   } = useForm();
 
   const onSubmit = (data: FieldValues) => {
-    const phoneNumber = data.phone_number as string;
-    navigation.navigate("verify");
+    if (data.phone_number === "+1234567890") {
+      const phoneNumber = data.phone_number as string;
+      navigation.navigate("verify");
+    } else {
+      alert("Telefon raqam xato kiritildi");
+    }
   };
   return (
     <View style={styles.container}>

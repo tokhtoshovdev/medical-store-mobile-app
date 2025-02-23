@@ -27,12 +27,14 @@ export const ProductCard = ({ product, navigation }: any) => {
           }}
         >
           <Image
-            source={require("../../../assets/product-img.png")}
+            source={{ uri: product.img }}
             style={{
-              width: 96,
-              height: 128,
+              width: "100%",
+              height: "100%",
               margin: "auto",
               objectFit: "cover",
+              borderTopLeftRadius: 15,
+              borderTopRightRadius: 15,
             }}
           />
         </View>

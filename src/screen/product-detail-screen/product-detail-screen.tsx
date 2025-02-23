@@ -6,8 +6,11 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { PRODUCTS } from "../../mock";
 import { Ionicons } from "@expo/vector-icons";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../app/cart-slice";
+import { RootState } from "../../app/store";
 
 export const ProductDetail = ({
   route,
@@ -17,14 +20,20 @@ export const ProductDetail = ({
   navigation: any;
 }) => {
   const { id } = route.params;
-  const product = PRODUCTS.find((p) => p.id === id);
+  const product = useSelector((state: RootState) =>
+    state.cart.products.find((p) => p.id === id)
+  );
+  const dispatch = useDispatch();
 
-  const addToCart = () => {
+  const handleAddToCart = () => {
     if (product) {
-      product.shopping = true;
-      navigation.goBack();
+      dispatch(addToCart(product));
+      setTimeout(() => {
+        navigation.goBack();
+      }, 1000);
     }
   };
+
   return (
     <ScrollView style={{ flex: 1, backgroundColor: "#fff", padding: 16 }}>
       <Ionicons
@@ -104,7 +113,7 @@ export const ProductDetail = ({
         </Text>
 
         <TouchableOpacity
-          onPress={() => addToCart()}
+          onPress={handleAddToCart}
           style={{
             width: 330,
             height: 45,

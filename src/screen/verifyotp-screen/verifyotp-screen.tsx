@@ -7,6 +7,7 @@ import {
   View,
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
+import { StatusBar } from "expo-status-bar";
 
 export const VerifyOtpScreen = ({ navigation }: { navigation: any }) => {
   const { control, handleSubmit } = useForm();
@@ -37,12 +38,17 @@ export const VerifyOtpScreen = ({ navigation }: { navigation: any }) => {
   };
 
   const onSubmit = (data: any) => {
-    console.log("OTP Submitted:", data);
-    navigation.navigate("loginsuccess");
+    if (data.otp.join("") === "123456") {
+      console.log("OTP Submitted:", data);
+      navigation.navigate("loginsuccess");
+    } else {
+      alert("Invalid OTP");
+    }
   };
 
   return (
     <View style={styles.container}>
+      <StatusBar style="light" backgroundColor="#4facfe" />
       <View>
         <Text style={styles.text}>Enter the verification code</Text>
         <Text style={styles.text1}>

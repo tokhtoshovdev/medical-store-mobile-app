@@ -56,5 +56,6 @@ const styles = StyleSheet.create({
     lineHeight: 35.45,
     letterSpacing: 0,
     textAlign: "center",
+    color: "#fff",
   },
 });
