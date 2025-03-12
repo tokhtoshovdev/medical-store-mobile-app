@@ -13,10 +13,9 @@ import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 
 const categories = [
-  { id: "1", name: "Dental", colors: ["#ff758c", "#ff7eb3"] },
-  { id: "2", name: "Wellness", colors: ["#00c6a9", "#00e676"] },
-  { id: "3", name: "Homeo", colors: ["#ff8c00", "#ffb74d"] },
-  { id: "4", name: "Eye care", colors: ["#007bff", "#4facfe"] },
+  { id: "1", name: "Stomatologiya", colors: ["#ff758c", "#ff7eb3"] },
+  { id: "2", name: "Salomatlik", colors: ["#00c6a9", "#00e676"] },
+  { id: "3", name: "Homeopatiya ", colors: ["#ff8c00", "#ffb74d"] },
 ];
 
 const CategoryCard = ({ name, colors }: { name: string; colors: any }) => {
@@ -30,6 +29,7 @@ const CategoryCard = ({ name, colors }: { name: string; colors: any }) => {
 
 type RootStackParamList = {
   notification: undefined;
+  home: undefined;
   shopping: undefined;
   allProducts: undefined;
   product: {
@@ -55,7 +55,7 @@ export const HomeScreen = ({
         <LinearGradient colors={["#4facfe", "#00f2fe"]} style={styles.header}>
           <View style={styles.headerContent}>
             <Image
-              source={require("../../../assets/avatar.jpg")}
+              source={require("../../../assets/logo-1.png")}
               style={styles.avatar}
             />
             <View style={styles.iconContainer}>
@@ -74,9 +74,9 @@ export const HomeScreen = ({
             </View>
           </View>
           <View style={styles.greetingContainer}>
-            <Text style={styles.greeting1}>Hi, Rahul</Text>
+            <Text style={styles.greeting1}>Salom hurmatli haridor</Text>
             <Text style={styles.greeting}>
-              Welcome to Nilkanth Medical Store
+              Oson Apteka do'koniga xush kelibsiz
             </Text>
           </View>
         </LinearGradient>
@@ -88,12 +88,12 @@ export const HomeScreen = ({
             style={styles.searchIcon}
           />
           <TextInput
-            placeholder="Search Medicine & Healthcare products"
+            placeholder="mahsulotlarini qidiring"
             style={styles.searchInput}
           />
         </View>
         <View style={styles.categoryWrapper}>
-          <Text style={styles.categoryTitle}>Top Categories</Text>
+          <Text style={styles.categoryTitle}>Eng yaxshi toifalar</Text>
           <FlatList
             horizontal
             data={categories}
@@ -123,7 +123,7 @@ export const HomeScreen = ({
           >
             <Text
               style={{
-                width: 131,
+                width: 151,
                 fontFamily: "Overpass",
                 fontWeight: "700",
                 fontSize: 20,
@@ -131,7 +131,7 @@ export const HomeScreen = ({
                 color: "#1987FB",
               }}
             >
-              Save extra on every order
+              Har bir buyurtma uchun 5% tejang
             </Text>
             <Text
               style={{
@@ -143,7 +143,7 @@ export const HomeScreen = ({
                 color: "#090F47A6",
               }}
             >
-              Etiam mollis metus non faucibus .{" "}
+              .{" "}
             </Text>
           </ImageBackground>
         </View>
@@ -164,7 +164,7 @@ export const HomeScreen = ({
               color: "#090F47",
             }}
           >
-            Deals of the Day
+            Kunning takliflari
           </Text>
           <Text
             style={{
@@ -176,7 +176,7 @@ export const HomeScreen = ({
             }}
             onPress={() => navigation.navigate("allProducts")}
           >
-            More
+            Ko'proq
           </Text>
         </View>
         <View
@@ -190,7 +190,7 @@ export const HomeScreen = ({
             marginBottom: 20,
           }}
         >
-          {products.slice(0, 4).map((product) => (
+          {products.slice(0, 4).map((product: any) => (
             <ProductCard
               key={product.id}
               product={product}
@@ -269,6 +269,8 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     paddingLeft: 30,
+    paddingTop: 5,
+    paddingBottom: 5,
   },
   categoryWrapper: {
     marginTop: 20,

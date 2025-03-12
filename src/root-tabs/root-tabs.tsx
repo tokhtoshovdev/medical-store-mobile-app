@@ -6,8 +6,13 @@ import {
   ShoppingScreen,
 } from "../screen";
 import { Ionicons } from "@expo/vector-icons";
-
-const Tab = createBottomTabNavigator();
+type RootTabParamList = {
+  home: undefined;
+  notification: undefined;
+  shopping: undefined;
+  profile: undefined;
+};
+const Tab = createBottomTabNavigator<RootTabParamList>();
 
 export const RootTabs = () => {
   return (

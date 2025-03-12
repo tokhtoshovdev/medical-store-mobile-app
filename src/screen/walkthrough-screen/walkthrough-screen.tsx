@@ -5,27 +5,24 @@ import { Image, StyleSheet, Text, View } from "react-native";
 const walkthroughData = [
   {
     image: require("../../../assets/walkthrough-img.png"),
-    title: "View and buy Medicine online",
-    description:
-      "Etiam mollis metus non purus faucibus sollicitudin. Pellentesque sagittis mi. Integer.",
+    title: "Dori-darmonlarni onlayn ko'ring va sotib oling",
+    description: "Xaridingizga omad tilaymiz",
   },
   {
     image: require("../../../assets/walkthrough-img.png"),
-    title: "Track your order",
+    title: "Buyurtmangizni kuzatib boring",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur venenatis.",
+      "Xaridingizga omad tilaymiz. Sizning buyurtmangizni kuzatib boring",
   },
   {
     image: require("../../../assets/walkthrough-img.png"),
-    title: "Get your medicine delivered",
-    description:
-      "Vivamus sit amet sapien nec augue suscipit tristique ac non tortor.",
+    title: "Dori-darmoningizni olib keling",
+    description: "Xaridingizga omad tilaymiz",
   },
   {
     image: require("../../../assets/walkthrough-img.png"),
-    title: "Your health, our priority",
-    description:
-      "Nulla facilisi. Duis sollicitudin orci vel justo accumsan, sit amet efficitur.",
+    title: "Sizning sog'lig'ingiz, bizning ustuvorligimiz",
+    description: "Xaridingizga omad tilaymiz",
   },
 ];
 

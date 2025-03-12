@@ -21,7 +21,7 @@ export const ProductDetail = ({
 }) => {
   const { id } = route.params;
   const product = useSelector((state: RootState) =>
-    state.cart.products.find((p) => p.id === id)
+    state.cart.products.find((p: any) => p.id === id)
   );
   const dispatch = useDispatch();
 
@@ -135,7 +135,7 @@ export const ProductDetail = ({
               color: "#FFFFFF",
             }}
           >
-            Add to Cart
+            Savatga qo'shish
           </Text>
         </TouchableOpacity>
       </View>

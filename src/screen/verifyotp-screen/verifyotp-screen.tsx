@@ -38,7 +38,7 @@ export const VerifyOtpScreen = ({ navigation }: { navigation: any }) => {
   };
 
   const onSubmit = (data: any) => {
-    if (data.otp.join("") === "123456") {
+    if (data.otp) {
       console.log("OTP Submitted:", data);
       navigation.navigate("loginsuccess");
     } else {
@@ -50,9 +50,10 @@ export const VerifyOtpScreen = ({ navigation }: { navigation: any }) => {
     <View style={styles.container}>
       <StatusBar style="light" backgroundColor="#4facfe" />
       <View>
-        <Text style={styles.text}>Enter the verification code</Text>
+        <Text style={styles.text}>Tasdiqlash kodini kiriting</Text>
         <Text style={styles.text1}>
-          We just sent you a verification code via phone +91 9265614292
+          Biz hozirgina +91 998 999 99 99 telefon orqali tasdiqlash kodini
+          yubordik
         </Text>
         <View style={styles.inputContainer}>
           {otp.map((_, index) => (
@@ -82,13 +83,11 @@ export const VerifyOtpScreen = ({ navigation }: { navigation: any }) => {
             style={styles.button}
             onPress={handleSubmit(onSubmit)}
           >
-            <Text style={styles.buttonText}>SUBMIT CODE</Text>
+            <Text style={styles.buttonText}>KOD YUBORING</Text>
           </TouchableOpacity>
         </View>
-        <Text style={styles.text2}>
-          The verification code will expire in 00:59
-        </Text>
-        <Text style={styles.resendText}>Resend Code</Text>
+        <Text style={styles.text2}>Tasdiqlash kodi 00:59 da tugaydi</Text>
+        <Text style={styles.resendText}>Kodni qayta yuborish</Text>
       </View>
     </View>
   );

@@ -35,7 +35,7 @@ export const NotificationScreen = () => {
                 lineHeight: 20.26,
               }}
             >
-              Notifications
+              Bildirishnomalar
             </Text>
           </View>
           <TouchableOpacity onPress={clearAllNotifications}>
@@ -48,7 +48,7 @@ export const NotificationScreen = () => {
                 color: "#1987FB",
               }}
             >
-              Clear all
+              Hammasini tozalang
             </Text>
           </TouchableOpacity>
         </View>

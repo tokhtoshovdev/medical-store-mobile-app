@@ -15,10 +15,10 @@ const Stack = createStackNavigator();
 export const RootStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName="splash"
+      initialRouteName="SplashScreen"
       screenOptions={{ headerShown: false }}
     >
-      <Stack.Screen name="splash" component={SplashScreen} />
+      <Stack.Screen name="SplashScreen" component={SplashScreen} />
       <Stack.Screen name="walkthrough" component={WalkthroughScreen} />
       <Stack.Screen name="login" component={LoginScreen} />
       <Stack.Screen name="verify" component={VerifyOtpScreen} />

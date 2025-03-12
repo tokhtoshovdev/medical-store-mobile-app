@@ -8,13 +8,13 @@ export const ShoppingScreen: React.FC = () => {
   const dispatch = useDispatch();
 
   const shoppingItems = useSelector((state: RootState) =>
-    state.cart.products.filter((p) => p.shopping && p.quantity > 0)
+    state.cart.products.filter((p: any) => p.shopping && p.quantity > 0)
   );
 
   return (
     <View style={{ flex: 1, padding: 20, marginTop: 50 }}>
       <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 20 }}>
-        Shopping Cart
+        Xarid savati
       </Text>
 
       {shoppingItems.length === 0 ? (
@@ -26,7 +26,7 @@ export const ShoppingScreen: React.FC = () => {
             marginTop: 50,
           }}
         >
-          Your cart is empty! 🛒
+          Savatingiz boʻsh!🛒
         </Text>
       ) : (
         <FlatList

@@ -7,7 +7,7 @@ export const SplashScreen = ({ navigation }: SplashScreenProps) => {
   useEffect(() => {
     setTimeout(() => {
       navigation.replace("walkthrough");
-    }, 1500);
+    }, 1000);
   }, [navigation]);
 
   return (
@@ -21,7 +21,7 @@ export const SplashScreen = ({ navigation }: SplashScreenProps) => {
           <View style={styles.logo}>
             <Image source={require("../../../assets/logo.png")} />
           </View>
-          <Text style={styles.text}>Nilkanth Medical </Text>
+          <Text style={styles.text}>Oson Apteka </Text>
         </View>
       </View>
     </ImageBackground>

@@ -15,14 +15,15 @@ export const LoginScreen = ({ navigation }: HomeScreenProps) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      phone_number: "",
+    },
+  });
 
   const onSubmit = (data: FieldValues) => {
-    if (data.phone_number === "+1234567890") {
-      const phoneNumber = data.phone_number as string;
+    if (data) {
       navigation.navigate("verify");
-    } else {
-      alert("Telefon raqam xato kiritildi");
     }
   };
   return (
@@ -32,10 +33,10 @@ export const LoginScreen = ({ navigation }: HomeScreenProps) => {
           <View style={styles.logo}>
             <Image source={require("../../../assets/logo.png")} />
           </View>
-          <Text style={styles.text}>Nilkanth Medical </Text>
+          <Text style={styles.text}>Oson Apteka </Text>
         </View>
         <Text style={styles.text1}>
-          Please Enter your Mobile Number to Login/Sign Up
+          Kirish/Ro‘yxatdan o‘tish uchun mobil raqamingizni kiriting
         </Text>
         <View>
           <Controller

@@ -18,7 +18,7 @@ export const LoginsuccessScreen = ({ navigation }: { navigation: any }) => {
           marginTop: 53,
         }}
       >
-        Phone Number Verified
+        Telefon raqami tasdiqlangan
       </Text>
       <Text
         style={{
@@ -31,8 +31,8 @@ export const LoginsuccessScreen = ({ navigation }: { navigation: any }) => {
           marginTop: 20,
         }}
       >
-        Congradulations, your phone number has been verified. You can start
-        using the app
+        Tabriklaymiz, telefon raqamingiz tasdiqlandi. Siz ilovadan foydalanishni
+        boshlashingiz mumkin
       </Text>
       <View
         style={{
@@ -42,7 +42,7 @@ export const LoginsuccessScreen = ({ navigation }: { navigation: any }) => {
         }}
       >
         <TouchableOpacity style={styles.button} onPress={onSubmit}>
-          <Text style={styles.buttonText}>CONTINUE</Text>
+          <Text style={styles.buttonText}>Davom eting</Text>
         </TouchableOpacity>
       </View>
     </View>

@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 export const ProfileScreen = () => {
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 20, fontWeight: "bold" }}>My Profile</Text>
+      <Text style={{ fontSize: 20, fontWeight: "bold" }}>Mening profilim</Text>
       <View
         style={{
           flexDirection: "row",
@@ -15,7 +15,7 @@ export const ProfileScreen = () => {
         }}
       >
         <Image
-          source={require("../../../assets/avatar.jpg")}
+          source={require("../../../assets/logo-1.png")}
           style={{ width: 63, height: 62, borderRadius: 50 }}
         />
         <View style={{}}>
@@ -27,7 +27,7 @@ export const ProfileScreen = () => {
               lineHeight: 25.32,
             }}
           >
-            Hi, Rahul kanjariya
+            Qulsoatova Iroda
           </Text>
           <Text
             style={{
@@ -37,7 +37,7 @@ export const ProfileScreen = () => {
               lineHeight: 17.72,
             }}
           >
-            Welcome to Nilkanth Medical Store
+            Oson Aptekaga Xush kelibsiz
           </Text>
         </View>
       </View>
@@ -70,7 +70,7 @@ export const ProfileScreen = () => {
                 fontSize: 18,
               }}
             >
-              Edit Profile
+              Profilni tahrirlash
             </Text>
           </View>
           <Ionicons name="chevron-forward" size={18} color="black" />
@@ -96,7 +96,7 @@ export const ProfileScreen = () => {
                 fontSize: 18,
               }}
             >
-              My orders
+              Mening buyurtmalarim
             </Text>
           </View>
           <Ionicons name="chevron-forward" size={18} color="black" />
@@ -122,7 +122,7 @@ export const ProfileScreen = () => {
                 fontSize: 18,
               }}
             >
-              Billing
+              Hisob-kitob
             </Text>
           </View>
           <Ionicons name="chevron-forward" size={18} color="black" />
@@ -148,7 +148,7 @@ export const ProfileScreen = () => {
                 fontSize: 18,
               }}
             >
-              Faq
+              Qisqa Savol javoblar
             </Text>
           </View>
           <Ionicons name="chevron-forward" size={18} color="black" />

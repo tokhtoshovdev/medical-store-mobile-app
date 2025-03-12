@@ -1,9 +1,9 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { Platform } from "react-native";
-import { RootStack } from "./root-stack";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
+import { RootStack } from "./root-stack";
 
 export default function App() {
   return (
