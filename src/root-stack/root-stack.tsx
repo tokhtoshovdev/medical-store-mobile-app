@@ -2,7 +2,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import {
   AllProduct,
   LoginScreen,
-  LoginsuccessScreen,
   ProductDetail,
   SplashScreen,
   VerifyOtpScreen,
@@ -21,8 +20,6 @@ export const RootStack = () => {
       <Stack.Screen name="SplashScreen" component={SplashScreen} />
       <Stack.Screen name="walkthrough" component={WalkthroughScreen} />
       <Stack.Screen name="login" component={LoginScreen} />
-      <Stack.Screen name="verify" component={VerifyOtpScreen} />
-      <Stack.Screen name="loginsuccess" component={LoginsuccessScreen} />
       <Stack.Screen name="home" component={RootTabs} />
       <Stack.Screen name="allProducts" component={AllProduct} />
       <Stack.Screen name="product" component={ProductDetail} />

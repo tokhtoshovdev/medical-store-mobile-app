@@ -1,10 +1,60 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useState } from "react";
+import {
+  useMeQuery,
+  useUpdateProfileMutation,
+} from "../../features/auth/authApi";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Toast from "react-native-toast-message";
 
-export const ProfileScreen = () => {
+export const ProfileScreen = ({ navigation }: { navigation: any }) => {
+  const { data: user } = useMeQuery({});
+  const [modalVisible, setModalVisible] = useState(false);
+  const [ubdateProfile] = useUpdateProfileMutation();
+
+  const handleLogout = async () => {
+    try {
+      await AsyncStorage.removeItem("accessToken");
+      Toast.show({
+        type: "success",
+        text1: "Chiqish muvaffaqiyatli amalga oshirildi",
+      });
+      setTimeout(() => {
+        navigation.navigate("login");
+      }, 2000);
+    } catch (error) {
+      console.error("Chiqishda xatolik:", error);
+      Toast.show({
+        type: "error",
+        text1: "Chiqishda xatolik yuz berdi",
+      });
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 20, fontWeight: "bold" }}>Mening profilim</Text>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+          Mening profilim
+        </Text>
+        <TouchableOpacity onPress={() => handleLogout()}>
+          <Ionicons name="log-out-outline" size={24} color="black" />
+        </TouchableOpacity>
+      </View>
       <View
         style={{
           flexDirection: "row",
@@ -27,7 +77,7 @@ export const ProfileScreen = () => {
               lineHeight: 25.32,
             }}
           >
-            Qulsoatova Iroda
+            {user?.fullName}
           </Text>
           <Text
             style={{
@@ -41,118 +91,132 @@ export const ProfileScreen = () => {
           </Text>
         </View>
       </View>
-      <View
+
+      <TouchableOpacity
+        onPress={() => setModalVisible(true)}
         style={{
+          flexDirection: "row",
+          gap: 10,
+          alignItems: "center",
           marginTop: 36,
-          display: "flex",
-          flexDirection: "column",
-          gap: 20,
+          borderBottomColor: "#000",
+          borderBottomWidth: 1,
+          paddingBottom: 20,
+          justifyContent: "space-between",
         }}
       >
-        <View
-          style={{
-            flexDirection: "row",
-            gap: 10,
-            alignItems: "center",
-            display: "flex",
-            justifyContent: "space-between",
-            borderBottomColor: "#000",
-            borderBottomWidth: 1,
-            paddingBottom: 20,
-          }}
-        >
-          <View style={{ flexDirection: "row", gap: 20, alignItems: "center" }}>
-            <Ionicons name="list" size={24} color="black" />
-            <Text
-              style={{
-                fontFamily: "Overpass",
-                fontWeight: "500",
-                fontSize: 18,
-              }}
-            >
-              Profilni tahrirlash
-            </Text>
-          </View>
-          <Ionicons name="chevron-forward" size={18} color="black" />
+        <View style={{ flexDirection: "row", gap: 20, alignItems: "center" }}>
+          <Ionicons name="list" size={24} color="black" />
+          <Text
+            style={{ fontFamily: "Overpass", fontWeight: "500", fontSize: 18 }}
+          >
+            Profilni tahrirlash
+          </Text>
         </View>
-        <View
-          style={{
-            flexDirection: "row",
-            gap: 10,
-            alignItems: "center",
-            display: "flex",
-            justifyContent: "space-between",
-            borderBottomColor: "#000",
-            borderBottomWidth: 1,
-            paddingBottom: 20,
-          }}
-        >
-          <View style={{ flexDirection: "row", gap: 20, alignItems: "center" }}>
-            <Ionicons name="options-sharp" size={24} color="black" />
-            <Text
-              style={{
-                fontFamily: "Overpass",
-                fontWeight: "500",
-                fontSize: 18,
-              }}
+        <Ionicons name="chevron-forward" size={18} color="black" />
+      </TouchableOpacity>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalBackground}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.modalTitle}>Profilni tahrirlash</Text>
+
+            {/* Profilni tahrirlash formasi */}
+            <Text style={styles.modalLabel}>Ism:</Text>
+            <Text style={styles.modalInput}> {user?.fullName} </Text>
+
+            {/* Qo'shimcha inputlar qo'shishingiz mumkin */}
+            <TouchableOpacity
+              onPress={() => setModalVisible(false)}
+              style={styles.closeButton}
             >
-              Mening buyurtmalarim
-            </Text>
+              <Text style={styles.closeButtonText}>Yopish</Text>
+            </TouchableOpacity>
           </View>
-          <Ionicons name="chevron-forward" size={18} color="black" />
         </View>
-        <View
-          style={{
-            flexDirection: "row",
-            gap: 10,
-            alignItems: "center",
-            display: "flex",
-            justifyContent: "space-between",
-            borderBottomColor: "#000",
-            borderBottomWidth: 1,
-            paddingBottom: 20,
-          }}
-        >
-          <View style={{ flexDirection: "row", gap: 20, alignItems: "center" }}>
-            <Ionicons name="wallet" size={24} color="black" />
-            <Text
-              style={{
-                fontFamily: "Overpass",
-                fontWeight: "500",
-                fontSize: 18,
-              }}
-            >
-              Hisob-kitob
-            </Text>
-          </View>
-          <Ionicons name="chevron-forward" size={18} color="black" />
+      </Modal>
+      <View
+        style={{
+          flexDirection: "row",
+          gap: 10,
+          alignItems: "center",
+          display: "flex",
+          justifyContent: "space-between",
+          borderBottomColor: "#000",
+          borderBottomWidth: 1,
+          paddingBottom: 20,
+        }}
+      >
+        <View style={{ flexDirection: "row", gap: 20, alignItems: "center" }}>
+          <Ionicons name="options-sharp" size={24} color="black" />
+          <Text
+            style={{
+              fontFamily: "Overpass",
+              fontWeight: "500",
+              fontSize: 18,
+            }}
+          >
+            Mening buyurtmalarim
+          </Text>
         </View>
-        <View
-          style={{
-            flexDirection: "row",
-            gap: 10,
-            alignItems: "center",
-            display: "flex",
-            justifyContent: "space-between",
-            borderBottomColor: "#000",
-            borderBottomWidth: 1,
-            paddingBottom: 20,
-          }}
-        >
-          <View style={{ flexDirection: "row", gap: 20, alignItems: "center" }}>
-            <Ionicons name="help" size={24} color="black" />
-            <Text
-              style={{
-                fontFamily: "Overpass",
-                fontWeight: "500",
-                fontSize: 18,
-              }}
-            >
-              Qisqa Savol javoblar
-            </Text>
-          </View>
-          <Ionicons name="chevron-forward" size={18} color="black" />
+        <Ionicons name="chevron-forward" size={18} color="black" />
+      </View>
+      <View
+        style={{
+          flexDirection: "row",
+          gap: 10,
+          alignItems: "center",
+          display: "flex",
+          justifyContent: "space-between",
+          borderBottomColor: "#000",
+          borderBottomWidth: 1,
+          paddingBottom: 20,
+        }}
+      >
+        <View style={{ flexDirection: "row", gap: 20, alignItems: "center" }}>
+          <Ionicons name="wallet" size={24} color="black" />
+          <Text
+            style={{
+              fontFamily: "Overpass",
+              fontWeight: "500",
+              fontSize: 18,
+            }}
+          >
+            Hisob-kitob
+          </Text>
         </View>
+        <Ionicons name="chevron-forward" size={18} color="black" />
+      </View>
+      <View
+        style={{
+          flexDirection: "row",
+          gap: 10,
+          alignItems: "center",
+          display: "flex",
+          justifyContent: "space-between",
+          borderBottomColor: "#000",
+          borderBottomWidth: 1,
+          paddingBottom: 20,
+        }}
+      >
+        <View style={{ flexDirection: "row", gap: 20, alignItems: "center" }}>
+          <Ionicons name="help" size={24} color="black" />
+          <Text
+            style={{
+              fontFamily: "Overpass",
+              fontWeight: "500",
+              fontSize: 18,
+            }}
+          >
+            Qisqa Savol javoblar
+          </Text>
+        </View>
+        <Ionicons name="chevron-forward" size={18} color="black" />
       </View>
     </View>
   );
@@ -162,5 +226,47 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 70,
     marginHorizontal: 20,
+  },
+  modalBackground: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContainer: {
+    backgroundColor: "white",
+    padding: 20,
+    borderRadius: 10,
+    width: "80%",
+  },
+  modalTitle: {
+    fontSize: 22,
+    fontWeight: "bold",
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  modalLabel: {
+    fontSize: 16,
+    fontWeight: "500",
+    marginBottom: 10,
+  },
+  modalInput: {
+    fontSize: 16,
+    marginBottom: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ccc",
+    paddingVertical: 5,
+  },
+  closeButton: {
+    backgroundColor: "#007BFF",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    marginTop: 20,
+  },
+  closeButtonText: {
+    color: "white",
+    fontSize: 16,
+    textAlign: "center",
   },
 });

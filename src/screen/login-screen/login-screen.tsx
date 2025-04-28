@@ -1,4 +1,3 @@
-import React from "react";
 import {
   View,
   Text,
@@ -9,6 +8,9 @@ import {
 } from "react-native";
 import { HomeScreenProps, onSubmitProps } from "./types";
 import { Controller, FieldValues, useForm } from "react-hook-form";
+import { useLoginMutation } from "../../features/auth/authApi";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Toast from "react-native-toast-message";
 
 export const LoginScreen = ({ navigation }: HomeScreenProps) => {
   const {
@@ -17,47 +19,98 @@ export const LoginScreen = ({ navigation }: HomeScreenProps) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      phone_number: "",
+      username: "",
+      password: "",
     },
   });
 
-  const onSubmit = (data: FieldValues) => {
-    if (data) {
-      navigation.navigate("verify");
+  const [login, { isLoading, error }] = useLoginMutation();
+
+  const onSubmit = async (data: FieldValues) => {
+    try {
+      const res = await login(data).unwrap();
+
+      if (res.token) {
+        await AsyncStorage.setItem("accessToken", res.token);
+      }
+
+      console.log(res.token);
+
+      Toast.show({
+        type: "success",
+        text1: "Muvaffaqiyat!",
+        text2: "Tizimga muvaffaqiyatli kirdingiz 👌",
+        visibilityTime: 2000,
+        position: "top",
+      });
+
+      setTimeout(() => {
+        navigation.navigate("home");
+      }, 2000);
+    } catch (err) {
+      Toast.show({
+        type: "error",
+        text1: "Xatolik!",
+        text2: "Tarmoq bilan bog‘lanishda muammo 😢",
+        visibilityTime: 2000,
+        position: "top",
+      });
     }
   };
+
   return (
     <View style={styles.container}>
       <View>
         <View>
           <View style={styles.logo}>
-            <Image source={require("../../../assets/logo.png")} />
+            <Image
+              style={styles.img}
+              source={require("../../../assets/logo.png")}
+            />
           </View>
           <Text style={styles.text}>Oson Apteka </Text>
         </View>
         <Text style={styles.text1}>
-          Kirish/Ro‘yxatdan o‘tish uchun mobil raqamingizni kiriting
+          Kirish/Ro‘yxatdan o‘tish uchun foydalanuvchi nomi va parolingizni
+          kiriting
         </Text>
         <View>
           <Controller
-            name="phone_number"
+            name="username"
             control={control}
-            rules={{ required: "Telefon raqam kiriting" }}
+            rules={{ required: "Foydalanuvchi nomini kiriting" }}
             render={({ field: { onChange, value } }) => (
               <View>
                 <TextInput
                   onChangeText={onChange}
                   style={styles.input}
-                  placeholder="Telefon raqam kiriting"
+                  placeholder="Foydalanuvchi nomi"
                   value={value}
                   placeholderTextColor="#090F4773"
-                  maxLength={13}
-                  keyboardType="phone-pad"
-                  textContentType="telephoneNumber"
-                  autoComplete="tel"
+                  autoCapitalize="none"
                 />
                 <Text style={styles.error}>
-                  {errors.phone_number?.message?.toString()}
+                  {errors.username?.message?.toString()}
+                </Text>
+              </View>
+            )}
+          />
+          <Controller
+            name="password"
+            control={control}
+            rules={{ required: "Parol kiriting" }}
+            render={({ field: { onChange, value } }) => (
+              <View>
+                <TextInput
+                  onChangeText={onChange}
+                  style={styles.input}
+                  placeholder="Parol"
+                  value={value}
+                  placeholderTextColor="#090F4773"
+                  secureTextEntry
+                />
+                <Text style={styles.error}>
+                  {errors.password?.message?.toString()}
                 </Text>
               </View>
             )}
@@ -66,7 +119,9 @@ export const LoginScreen = ({ navigation }: HomeScreenProps) => {
             style={styles.button}
             onPress={handleSubmit(onSubmit)}
           >
-            <Text style={styles.button_text}>Continue</Text>
+            <Text style={styles.button_text}>
+              {isLoading ? "Loading..." : "Continue"}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -86,9 +141,19 @@ const styles = StyleSheet.create({
     height: 74,
     padding: 12,
     backgroundColor: "#fff",
-    borderRadius: "100%",
-    margin: "auto",
+    borderRadius: 100,
     marginBottom: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#3f51b5",
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5,
+    margin: "auto",
+  },
+  img: {
+    alignItems: "center",
+    justifyContent: "center",
   },
   text: {
     fontFamily: "Overpass",
@@ -96,7 +161,6 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
     fontSize: 28,
     lineHeight: 35.45,
-    letterSpacing: 0,
     textAlign: "center",
   },
   text1: {
@@ -112,7 +176,6 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     borderWidth: 1,
     color: "#090F4773",
-    borderStyle: "solid",
     fontFamily: "Overpass",
     fontWeight: "400",
     fontSize: 24,
@@ -129,7 +192,6 @@ const styles = StyleSheet.create({
   button: {
     width: 330,
     borderRadius: 56,
-    color: "#fff",
     backgroundColor: "#4157FF",
     padding: 15,
     marginTop: 40,
@@ -138,8 +200,6 @@ const styles = StyleSheet.create({
     fontFamily: "Overpass",
     fontWeight: "700",
     fontSize: 20,
-    lineHeight: 20.26,
-    letterSpacing: 0,
     textAlign: "center",
     color: "#FFFFFF",
   },
