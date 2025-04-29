@@ -191,7 +191,7 @@ export const ProfileScreen = ({ navigation }: { navigation: any }) => {
                   <TextInput
                     onChangeText={onChange}
                     style={styles.input}
-                    placeholder="Foydalanuvchi ismi"
+                    placeholder={`${user?.fullName}ni o'zgartirish`}
                     value={value}
                     placeholderTextColor="#090F4773"
                     autoCapitalize="none"
@@ -211,7 +211,7 @@ export const ProfileScreen = ({ navigation }: { navigation: any }) => {
                   <TextInput
                     onChangeText={onChange}
                     style={styles.input}
-                    placeholder="Foydalanuvchi nomi"
+                    placeholder={`${user?.username}ni o'zgartirish`}
                     value={value}
                     placeholderTextColor="#090F4773"
                     autoCapitalize="none"
@@ -222,9 +222,6 @@ export const ProfileScreen = ({ navigation }: { navigation: any }) => {
                 </View>
               )}
             />
-
-            <Text style={styles.modalLabel}>Ism:</Text>
-            <Text style={styles.modalInput}> {user?.fullName} </Text>
 
             <TouchableOpacity
               onPress={handleSubmit(handleUpdateProfile)}
