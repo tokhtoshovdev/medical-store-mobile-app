@@ -95,6 +95,7 @@ export const LoginScreen = ({ navigation }: HomeScreenProps) => {
               </View>
             )}
           />
+
           <Controller
             name="password"
             control={control}

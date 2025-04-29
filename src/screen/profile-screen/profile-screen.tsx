@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  TextInput,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
@@ -14,11 +15,19 @@ import {
 } from "../../features/auth/authApi";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Toast from "react-native-toast-message";
+import { Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 export const ProfileScreen = ({ navigation }: { navigation: any }) => {
   const { data: user } = useMeQuery({});
   const [modalVisible, setModalVisible] = useState(false);
   const [ubdateProfile] = useUpdateProfileMutation();
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   const handleLogout = async () => {
     try {
@@ -36,6 +45,54 @@ export const ProfileScreen = ({ navigation }: { navigation: any }) => {
         type: "error",
         text1: "Chiqishda xatolik yuz berdi",
       });
+    }
+  };
+
+  const handleModalClose = () => {
+    setModalVisible(false);
+  };
+
+  const handleSave = async (data: any) => {
+    try {
+      await ubdateProfile(data).unwrap();
+      Toast.show({
+        type: "success",
+        text1: "O'zgartirish muvaffaqiyatli amalga oshirildi",
+      });
+      setModalVisible(false);
+    } catch (error) {
+      console.error("O'zgartirishda xatolik:", error);
+      Toast.show({
+        type: "error",
+        text1: "O'zgartirishda xatolik yuz berdi",
+      });
+    }
+  };
+
+  const handleUpdateProfile = async (data: any) => {
+    try {
+      await ubdateProfile({
+        id: user?._id,
+        body: { username: data.username, fullName: data.fullName },
+      }).unwrap();
+
+      Toast.show({
+        type: "success",
+        text1: "Muvaffaqiyat!",
+        text2: "Profil ma'lumotlaringiz yangilandi.",
+        visibilityTime: 2000,
+        position: "top",
+      });
+      setModalVisible(false);
+    } catch (error) {
+      Toast.show({
+        type: "error",
+        text1: "Xatolik!",
+        text2: "Profilni yangilashda xato yuz berdi.",
+        visibilityTime: 2000,
+        position: "top",
+      });
+      console.log("Profilni yangilashda xatolik:", error);
     }
   };
 
@@ -126,16 +183,54 @@ export const ProfileScreen = ({ navigation }: { navigation: any }) => {
           <View style={styles.modalContainer}>
             <Text style={styles.modalTitle}>Profilni tahrirlash</Text>
 
-            {/* Profilni tahrirlash formasi */}
+            <Controller
+              name="fullName"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <View>
+                  <TextInput
+                    onChangeText={onChange}
+                    style={styles.input}
+                    placeholder="Foydalanuvchi ismi"
+                    value={value}
+                    placeholderTextColor="#090F4773"
+                    autoCapitalize="none"
+                  />
+                  <Text style={styles.error}>
+                    {errors.fullName?.message?.toString()}
+                  </Text>
+                </View>
+              )}
+            />
+
+            <Controller
+              name="username"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <View>
+                  <TextInput
+                    onChangeText={onChange}
+                    style={styles.input}
+                    placeholder="Foydalanuvchi nomi"
+                    value={value}
+                    placeholderTextColor="#090F4773"
+                    autoCapitalize="none"
+                  />
+                  <Text style={styles.error}>
+                    {errors.username?.message?.toString()}
+                  </Text>
+                </View>
+              )}
+            />
+
             <Text style={styles.modalLabel}>Ism:</Text>
             <Text style={styles.modalInput}> {user?.fullName} </Text>
 
-            {/* Qo'shimcha inputlar qo'shishingiz mumkin */}
             <TouchableOpacity
-              onPress={() => setModalVisible(false)}
+              onPress={handleSubmit(handleUpdateProfile)}
               style={styles.closeButton}
             >
-              <Text style={styles.closeButtonText}>Yopish</Text>
+              <Text style={styles.closeButtonText}>Saqlash</Text>
             </TouchableOpacity>
           </View>
         </View>
